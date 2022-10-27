@@ -1,0 +1,42 @@
+﻿@model ICollection<Order>
+
+<div class="container text-center mt-3">
+    @if (@TempData["Message"] != null)
+    {
+        <p class="alert alert-danger">@TempData["Message"]</p>
+    }
+<table class="table table-bordered">
+    <tr>
+        <th colspan="7" class="h3 bg-light text-success">Order List</th>
+      
+    </tr>
+    <tr>
+        <th>Order Id</th>
+        <th>Book Id</th>
+        <th>Email</th>
+        <th>Quanity</th>
+        <th>Date</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var order in Model)
+    {
+        <tr>
+            <td>@order.Id</td>
+            <td>@order.BookId</td>
+            <td>
+                @order.UserEmail
+            </td>
+            <td>@order.OrderQuantity</td>
+            <td>
+                @order.OrderDate
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-controller="Order" asp-action="Delete" asp-route-id="@order.Id"
+                   onclick="    return confirm('Are you sure to delete this order ?');">
+                    Delete
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+</div>
